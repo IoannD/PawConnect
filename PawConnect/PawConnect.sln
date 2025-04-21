@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawConnect.API", "PawConnect.API\PawConnect.API.csproj", "{86A5D531-0028-4A49-8257-F46CE85127AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawConnect.Domain", "PawConnect.Domain\PawConnect.Domain.csproj", "{38E13DEE-8ADA-4FA3-9D26-5ADD6CA3E367}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawConnect.Application", "PawConnect.Application\PawConnect.Application.csproj", "{08B259CB-38FF-4070-9706-DD3A6BEB2943}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86A5D531-0028-4A49-8257-F46CE85127AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86A5D531-0028-4A49-8257-F46CE85127AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86A5D531-0028-4A49-8257-F46CE85127AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86A5D531-0028-4A49-8257-F46CE85127AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38E13DEE-8ADA-4FA3-9D26-5ADD6CA3E367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38E13DEE-8ADA-4FA3-9D26-5ADD6CA3E367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38E13DEE-8ADA-4FA3-9D26-5ADD6CA3E367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38E13DEE-8ADA-4FA3-9D26-5ADD6CA3E367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08B259CB-38FF-4070-9706-DD3A6BEB2943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08B259CB-38FF-4070-9706-DD3A6BEB2943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08B259CB-38FF-4070-9706-DD3A6BEB2943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08B259CB-38FF-4070-9706-DD3A6BEB2943}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
