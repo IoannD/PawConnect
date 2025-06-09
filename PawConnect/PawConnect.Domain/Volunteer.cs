@@ -28,9 +28,9 @@ public class Volunteer : Entity
     public PhoneNumber PhoneNumber { get; private set; }
     public Email Email { get; private set; }
     public int ExperienceInYears { get; private set; }
-    public List<Pet> Pets => _pets;
-    public List<DonationDetails> DonationDetails => _donationDetails;
-    public List<SocialNetwork> SocialNetworks => _socialNetworks;
+    public IReadOnlyList<Pet> Pets => _pets;
+    public IReadOnlyList<DonationDetails> DonationDetails => _donationDetails;
+    public IReadOnlyList<SocialNetwork> SocialNetworks => _socialNetworks;
 
     public int CountAdoptedPets => Pets.Count(p => p.Status == PetStatus.Adopted);
     public int CountLookingForHomePets => Pets.Count(p => p.Status == PetStatus.LookingForHome);

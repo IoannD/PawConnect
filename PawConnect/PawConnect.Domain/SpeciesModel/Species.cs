@@ -4,6 +4,8 @@ namespace PawConnect.Domain.SpeciesModel;
 
 public class Species : Entity
 {
+    private List<Breed> _breeds = new();
+
     private Species(string name)
     {
         Id = Guid.NewGuid();
@@ -12,7 +14,7 @@ public class Species : Entity
 
     public Guid Id { get; }
     public string Name { get; }
-    public List<Breed> Breeds { get; } = new();
+    public IReadOnlyList<Breed> Breeds => _breeds;
 
     private static Result<Species> Create(string name)
     {

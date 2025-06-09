@@ -30,7 +30,7 @@ public class Pet : Entity
     public DateOnly BirthDate { get; private set; }
     public bool IsVaccinated { get; private set; }
     public DateTime CreatedAt { get; private set; }
-    public List<DonationDetails> DonationDetails => _donationDetails;
+    public IReadOnlyList<DonationDetails> DonationDetails => _donationDetails;
     public PetStatus Status { get; private set; }
 
     public static Result<Pet> Create(string name, string description, string contactNumber)
