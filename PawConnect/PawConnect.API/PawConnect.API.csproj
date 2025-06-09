@@ -13,6 +13,7 @@
     <ItemGroup>
       <ProjectReference Include="..\PawConnect.Application\PawConnect.Application.csproj" />
       <ProjectReference Include="..\PawConnect.Domain\PawConnect.Domain.csproj" />
+      <ProjectReference Include="..\PawConnect.Infrastucture\PawConnect.Infrastucture.csproj" />
     </ItemGroup>
 
 </Project>
