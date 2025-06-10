@@ -6,9 +6,9 @@ namespace PawConnect.Domain;
 
 public class Volunteer : Entity
 {
-    private List<Pet> _pets = new();
-    private List<SocialNetwork> _socialNetworks = new();
-    private List<DonationDetails> _donationDetails = new();
+    private List<Pet> _pets = [];
+    private List<SocialNetwork> _socialNetworks = [];
+    private List<DonationDetails> _donationDetails = [];
     private Volunteer(string firstName, string lastName, string middleName,
         string description, PhoneNumber phoneNumber, Email email)
     {
@@ -37,26 +37,20 @@ public class Volunteer : Entity
     public int CountNeedsHelpPets => Pets.Count(p => p.Status == PetStatus.NeedsHelp);
 
     public static Result<Volunteer> Create(string firstName, string lastName, string middleName,
-        string description, string phoneNumber, string email)
+        string description, PhoneNumber phoneNumber, Email email)
     {
         if (string.IsNullOrWhiteSpace(firstName))
             return Result.Failure<Volunteer>("First name is required.");
+
         if (string.IsNullOrWhiteSpace(lastName))
             return Result.Failure<Volunteer>("Last name is required.");
+
         if (string.IsNullOrWhiteSpace(middleName))
             middleName = null!;
-        if (string.IsNullOrWhiteSpace(description))
-            return Result.Failure<Volunteer>("Description is required.");
 
-        var phoneNumberResult = PhoneNumber.Create(phoneNumber);
-        if (phoneNumberResult.IsFailure)
-            return Result.Failure<Volunteer>(phoneNumberResult.Error);
-
-        var emailResult = Email.Create(email);
-        if (emailResult.IsFailure)
-            return Result.Failure<Volunteer>(emailResult.Error);
-
-        return Result.Success(new Volunteer(firstName, lastName, middleName, description,
-            phoneNumberResult.Value, emailResult.Value));
+        return string.IsNullOrWhiteSpace(description)
+            ? Result.Failure<Volunteer>("Description is required.")
+            : Result.Success(new Volunteer(firstName, lastName, middleName, description,
+            phoneNumber, email));
     }
 }

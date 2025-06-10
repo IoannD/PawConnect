@@ -4,7 +4,7 @@ namespace PawConnect.Domain.SpeciesModel;
 
 public class Species : Entity
 {
-    private List<Breed> _breeds = new();
+    private List<Breed> _breeds = [];
 
     private Species(string name)
     {

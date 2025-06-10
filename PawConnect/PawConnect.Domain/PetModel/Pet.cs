@@ -5,7 +5,7 @@ namespace PawConnect.Domain.PetModel;
 
 public class Pet : Entity
 {
-    private List<DonationDetails> _donationDetails = new();
+    private List<DonationDetails> _donationDetails = [];
 
     private Pet(string name, string description, PhoneNumber contactNumber)
     {
@@ -33,16 +33,10 @@ public class Pet : Entity
     public IReadOnlyList<DonationDetails> DonationDetails => _donationDetails;
     public PetStatus Status { get; private set; }
 
-    public static Result<Pet> Create(string name, string description, string contactNumber)
+    public static Result<Pet> Create(string name, string description, PhoneNumber contactNumber)
     {
-        if (string.IsNullOrWhiteSpace(name))
-            return Result.Failure<Pet>("Name is required.");
-        if (string.IsNullOrWhiteSpace(description))
-            return Result.Failure<Pet>("Description is required.");
-
-        var phoneResult = PhoneNumber.Create(contactNumber);
-        return phoneResult.IsFailure
-            ? Result.Failure<Pet>(phoneResult.Error)
-            : Result.Success(new Pet(name, description, phoneResult.Value));
+        return string.IsNullOrWhiteSpace(name)
+            ? Result.Failure<Pet>("Name is required.")
+            : Result.Success(new Pet(name, description, contactNumber));
     }
 }
