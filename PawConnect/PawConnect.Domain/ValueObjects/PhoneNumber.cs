@@ -3,13 +3,13 @@ using CSharpFunctionalExtensions;
 
 namespace PawConnect.Domain.ValueObjects;
 
-public partial class PhoneNumber : ValueObject
+public partial record PhoneNumber
 {
     private static readonly Regex PhoneRegex = PhoneRegexGenerate();
 
-    private PhoneNumber(string phoneNumber)
+    private PhoneNumber(string phone)
     {
-        Phone = phoneNumber;
+        Phone = phone;
     }
 
     public string Phone { get; }
@@ -19,11 +19,6 @@ public partial class PhoneNumber : ValueObject
         return PhoneRegex.IsMatch(phoneNumber)
             ? Result.Success(new PhoneNumber(phoneNumber))
             : Result.Failure<PhoneNumber>("Invalid phone number.");
-    }
-
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Phone;
     }
 
     [GeneratedRegex("^\\+?[1-9][0-9]{7,14}$")]

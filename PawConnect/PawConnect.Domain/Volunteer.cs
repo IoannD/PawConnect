@@ -6,9 +6,13 @@ namespace PawConnect.Domain;
 
 public class Volunteer : Entity
 {
+    [Obsolete("Only for EF Core", true)]
+    public Volunteer()
+    {
+    }
+
     private List<Pet> _pets = [];
-    private List<SocialNetwork> _socialNetworks = [];
-    private List<DonationDetails> _donationDetails = [];
+
     private Volunteer(string firstName, string lastName, string middleName,
         string description, PhoneNumber phoneNumber, Email email)
     {
@@ -28,9 +32,9 @@ public class Volunteer : Entity
     public PhoneNumber PhoneNumber { get; private set; }
     public Email Email { get; private set; }
     public int ExperienceInYears { get; private set; }
+    public Donation Donation { get; private set; }
+    public SocialNetworks SocialNetworks { get; private set; }
     public IReadOnlyList<Pet> Pets => _pets;
-    public IReadOnlyList<DonationDetails> DonationDetails => _donationDetails;
-    public IReadOnlyList<SocialNetwork> SocialNetworks => _socialNetworks;
 
     public int CountAdoptedPets => Pets.Count(p => p.Status == PetStatus.Adopted);
     public int CountLookingForHomePets => Pets.Count(p => p.Status == PetStatus.LookingForHome);
