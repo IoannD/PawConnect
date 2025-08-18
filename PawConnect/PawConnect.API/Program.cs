@@ -1,4 +1,4 @@
-using PawConnect.Infrastucture;
+using PawConnect.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 

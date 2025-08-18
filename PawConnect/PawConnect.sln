@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawConnect.Domain", "PawCon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawConnect.Application", "PawConnect.Application\PawConnect.Application.csproj", "{08B259CB-38FF-4070-9706-DD3A6BEB2943}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawConnect.Infrastucture", "PawConnect.Infrastucture\PawConnect.Infrastucture.csproj", "{A83AF17D-33DB-406F-8A5B-72254E20B273}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawConnect.Infrastructure", "PawConnect.Infrastructure\PawConnect.Infrastructure.csproj", "{A83AF17D-33DB-406F-8A5B-72254E20B273}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E0DCED2C-D178-4BE2-A660-531BF09E8DD2}"
 	ProjectSection(SolutionItems) = preProject

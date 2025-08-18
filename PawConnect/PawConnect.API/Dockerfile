@@ -10,7 +10,7 @@ WORKDIR /src
 COPY ["PawConnect.API/PawConnect.API.csproj", "PawConnect.API/"]
 COPY ["PawConnect.Application/PawConnect.Application.csproj", "PawConnect.Application/"]
 COPY ["PawConnect.Domain/PawConnect.Domain.csproj", "PawConnect.Domain/"]
-COPY ["PawConnect.Infrastucture/PawConnect.Infrastucture.csproj", "PawConnect.Infrastucture/"]
+COPY ["PawConnect.Infrastructure/PawConnect.Infrastructure.csproj", "PawConnect.Infrastructure/"]
 RUN dotnet restore "PawConnect.API/PawConnect.API.csproj"
 COPY . .
 WORKDIR "/src/PawConnect.API"

@@ -2,7 +2,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace PawConnect.Infrastucture.Utils;
+namespace PawConnect.Infrastructure.Utils;
 
 public static class SnakeCaseNamingExtensions
 {

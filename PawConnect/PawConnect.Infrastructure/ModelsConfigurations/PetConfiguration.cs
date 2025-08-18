@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PawConnect.Domain.PetModel;
 
-namespace PawConnect.Infrastucture.ModelsConfigurations;
+namespace PawConnect.Infrastructure.ModelsConfigurations;
 
 public class PetConfiguration : IEntityTypeConfiguration<Pet>
 {

@@ -3,9 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using PawConnect.Domain;
 using PawConnect.Domain.SpeciesModel;
-using PawConnect.Infrastucture.Utils;
+using PawConnect.Infrastructure.Utils;
 
-namespace PawConnect.Infrastucture;
+namespace PawConnect.Infrastructure;
 
 public class AppDbContext(IConfiguration configuration) : DbContext
 {
