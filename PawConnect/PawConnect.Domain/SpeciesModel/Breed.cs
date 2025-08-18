@@ -4,6 +4,10 @@ namespace PawConnect.Domain.SpeciesModel;
 
 public class Breed : Entity
 {
+    [Obsolete("Only for EF Core", true)]
+    public Breed()
+    {
+    }
     private Breed(string name)
     {
         Id = Guid.NewGuid();

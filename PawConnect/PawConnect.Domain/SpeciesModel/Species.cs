@@ -6,6 +6,11 @@ public class Species : Entity
 {
     private List<Breed> _breeds = [];
 
+    [Obsolete("Only for EF Core", true)]
+    public Species()
+    {
+    }
+
     private Species(string name)
     {
         Id = Guid.NewGuid();

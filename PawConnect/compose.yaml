@@ -1,0 +1,26 @@
+﻿services:
+  pawconnect.api:
+    image: pawconnect.api
+    build:
+      context: .
+      dockerfile: PawConnect.API/Dockerfile
+    ports:
+      - 5555:8080
+    depends_on:
+      - "db"
+  
+  db:
+    image: postgres:latest
+    container_name: db_paw_connect
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "PawConnect"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "Qwerty123"
+    ports:
+      - 5437:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:

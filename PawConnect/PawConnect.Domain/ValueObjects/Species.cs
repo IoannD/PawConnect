@@ -2,18 +2,14 @@ using CSharpFunctionalExtensions;
 
 namespace PawConnect.Domain.ValueObjects;
 
-public class Species : ValueObject
+public record Species
 {
     private Species(Guid speciesId)
     {
         SpeciesId = speciesId;
     }
-    public Guid SpeciesId { get; }
 
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return SpeciesId;
-    }
+    public Guid SpeciesId { get; }
 
     private static Result<Species> Create(Guid speciesId)
     {

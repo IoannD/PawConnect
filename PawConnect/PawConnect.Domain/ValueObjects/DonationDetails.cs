@@ -2,7 +2,7 @@ using CSharpFunctionalExtensions;
 
 namespace PawConnect.Domain.ValueObjects;
 
-public class DonationDetails : ValueObject
+public record DonationDetails
 {
     private DonationDetails(string title, string description)
     {
@@ -12,12 +12,6 @@ public class DonationDetails : ValueObject
 
     public string Title { get; }
     public string Description { get; }
-
-    protected override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Title;
-        yield return Description;
-    }
 
     public static Result<DonationDetails> Create(string title, string description)
     {

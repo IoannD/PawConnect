@@ -5,7 +5,10 @@ namespace PawConnect.Domain.PetModel;
 
 public class Pet : Entity
 {
-    private List<DonationDetails> _donationDetails = [];
+    [Obsolete("Only for EF Core", true)]
+    public Pet()
+    {
+    }
 
     private Pet(string name, string description, PhoneNumber contactNumber)
     {
@@ -30,7 +33,7 @@ public class Pet : Entity
     public DateOnly BirthDate { get; private set; }
     public bool IsVaccinated { get; private set; }
     public DateTime CreatedAt { get; private set; }
-    public IReadOnlyList<DonationDetails> DonationDetails => _donationDetails;
+    public Donation Donation { get; private set; }
     public PetStatus Status { get; private set; }
 
     public static Result<Pet> Create(string name, string description, PhoneNumber contactNumber)

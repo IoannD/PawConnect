@@ -2,24 +2,19 @@ using CSharpFunctionalExtensions;
 
 namespace PawConnect.Domain.ValueObjects;
 
-public class Breed : ValueObject
+public record Breed
 {
-    private Breed(Guid id)
+    private Breed(Guid breedId)
     {
-        Id = id;
+        BreedId = breedId;
     }
 
-    public Guid Id { get; }
+    public Guid BreedId { get; }
 
-    protected override IEnumerable<object> GetEqualityComponents()
+    private static Result<Breed> Create(Guid breedId)
     {
-        yield return Id;
-    }
-
-    private static Result<Breed> Create(Guid id)
-    {
-        return id == Guid.Empty
+        return breedId == Guid.Empty
             ? Result.Failure<Breed>("Breed Id cannot be empty")
-            : Result.Success(new Breed(id));
+            : Result.Success(new Breed(breedId));
     }
 }
