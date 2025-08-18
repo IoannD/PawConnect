@@ -23,7 +23,6 @@ public class VolunteerConfiguration : IEntityTypeConfiguration<Volunteer>
         builder.Property(v => v.MiddleName)
             .HasMaxLength(DbConstants.TextLengthShort);
 
-        // Todo: extract duplicated config to a dedicated file
         builder.ComplexProperty(v => v.PhoneNumber, pb =>
         {
             pb.Property(ph => ph.Phone)
