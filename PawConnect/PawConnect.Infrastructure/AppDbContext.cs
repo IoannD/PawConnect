@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using PawConnect.Domain;
 using PawConnect.Domain.SpeciesModel;
+using PawConnect.Domain.VolunteerModel;
 using PawConnect.Infrastructure.Utils;
 
 namespace PawConnect.Infrastructure;

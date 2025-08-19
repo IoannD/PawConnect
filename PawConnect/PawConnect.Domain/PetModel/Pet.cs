@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using PawConnect.Domain.Shared;
 using PawConnect.Domain.ValueObjects;
 
 namespace PawConnect.Domain.PetModel;
@@ -36,10 +37,10 @@ public class Pet : Entity
     public Donation Donation { get; private set; }
     public PetStatus Status { get; private set; }
 
-    public static Result<Pet> Create(string name, string description, PhoneNumber contactNumber)
+    public static Result<Pet, Error> Create(string name, string description, PhoneNumber contactNumber)
     {
         return string.IsNullOrWhiteSpace(name)
-            ? Result.Failure<Pet>("Name is required.")
-            : Result.Success(new Pet(name, description, contactNumber));
+            ? Result.Failure<Pet, Error>(Errors.General.ValueIsRequired(nameof(name)))
+            : Result.Success<Pet, Error>(new Pet(name, description, contactNumber));
     }
 }
