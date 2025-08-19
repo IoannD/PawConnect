@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using PawConnect.Domain.Shared;
 
 namespace PawConnect.Domain.SpeciesModel;
 
@@ -21,10 +22,10 @@ public class Species : Entity
     public string Name { get; }
     public IReadOnlyList<Breed> Breeds => _breeds;
 
-    private static Result<Species> Create(string name)
+    private static Result<Species, Error> Create(string name)
     {
         return string.IsNullOrWhiteSpace(name)
-            ? Result.Failure<Species>("Species name is required.")
-            : Result.Success(new Species(name));
+            ? Result.Failure<Species, Error>(Errors.General.ValueIsRequired("species name"))
+            : Result.Success<Species, Error>(new Species(name));
     }
 }

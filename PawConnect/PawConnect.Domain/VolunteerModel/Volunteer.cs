@@ -1,8 +1,9 @@
 using CSharpFunctionalExtensions;
 using PawConnect.Domain.PetModel;
+using PawConnect.Domain.Shared;
 using PawConnect.Domain.ValueObjects;
 
-namespace PawConnect.Domain;
+namespace PawConnect.Domain.VolunteerModel;
 
 public class Volunteer : Entity
 {
@@ -40,21 +41,21 @@ public class Volunteer : Entity
     public int CountLookingForHomePets => Pets.Count(p => p.Status == PetStatus.LookingForHome);
     public int CountNeedsHelpPets => Pets.Count(p => p.Status == PetStatus.NeedsHelp);
 
-    public static Result<Volunteer> Create(string firstName, string lastName, string middleName,
+    public static Result<Volunteer, Error> Create(string firstName, string lastName, string middleName,
         string description, PhoneNumber phoneNumber, Email email)
     {
         if (string.IsNullOrWhiteSpace(firstName))
-            return Result.Failure<Volunteer>("First name is required.");
+            return Result.Failure<Volunteer, Error>(Errors.General.ValueIsRequired(nameof(firstName)));
 
         if (string.IsNullOrWhiteSpace(lastName))
-            return Result.Failure<Volunteer>("Last name is required.");
+            return Errors.General.ValueIsRequired(nameof(lastName));
 
         if (string.IsNullOrWhiteSpace(middleName))
             middleName = null!;
 
         return string.IsNullOrWhiteSpace(description)
-            ? Result.Failure<Volunteer>("Description is required.")
-            : Result.Success(new Volunteer(firstName, lastName, middleName, description,
-            phoneNumber, email));
+            ? Errors.General.ValueIsRequired(nameof(description))
+            : Result.Success<Volunteer, Error>(new Volunteer(firstName, lastName,
+                middleName, description, phoneNumber, email));
     }
 }

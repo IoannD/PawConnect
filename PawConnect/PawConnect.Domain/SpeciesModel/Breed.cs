@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using PawConnect.Domain.Shared;
 
 namespace PawConnect.Domain.SpeciesModel;
 
@@ -17,10 +18,10 @@ public class Breed : Entity
     public Guid Id { get; }
     public string Name { get; }
 
-    public static Result<Breed> Create(string name)
+    public static Result<Breed, Error> Create(string name)
     {
         return (string.IsNullOrWhiteSpace(name))
-            ? Result.Failure<Breed>($"Breed name is required.")
-            : Result.Success(new Breed(name));
+            ? Result.Failure<Breed, Error>(Errors.General.ValueIsRequired("breed name"))
+            : Result.Success<Breed, Error>(new Breed(name));
     }
 }
