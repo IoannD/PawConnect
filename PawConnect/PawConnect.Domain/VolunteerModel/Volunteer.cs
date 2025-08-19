@@ -14,7 +14,7 @@ public class Volunteer : Entity
 
     private List<Pet> _pets = [];
 
-    private Volunteer(string firstName, string lastName, string middleName,
+    private Volunteer(string firstName, string lastName, string? middleName,
         string description, PhoneNumber phoneNumber, Email email)
     {
         FirstName = firstName;
@@ -45,17 +45,25 @@ public class Volunteer : Entity
         string description, PhoneNumber phoneNumber, Email email)
     {
         if (string.IsNullOrWhiteSpace(firstName))
-            return Result.Failure<Volunteer, Error>(Errors.General.ValueIsRequired(nameof(firstName)));
+            return Errors.General.ValueIsRequired(nameof(firstName));
+
+        if (firstName.Length > DbConstants.TextLengthShort)
+            return Errors.General.StringTooLong(nameof(firstName), DbConstants.TextLengthShort);
 
         if (string.IsNullOrWhiteSpace(lastName))
             return Errors.General.ValueIsRequired(nameof(lastName));
 
+        if (lastName.Length > DbConstants.TextLengthShort)
+            return Errors.General.StringTooLong(nameof(lastName), DbConstants.TextLengthShort);
+
         if (string.IsNullOrWhiteSpace(middleName))
             middleName = null!;
 
+        if (middleName != null! && middleName.Length > DbConstants.TextLengthShort)
+            return Errors.General.StringTooLong(nameof(lastName), DbConstants.TextLengthShort);
+
         return string.IsNullOrWhiteSpace(description)
             ? Errors.General.ValueIsRequired(nameof(description))
-            : Result.Success<Volunteer, Error>(new Volunteer(firstName, lastName,
-                middleName, description, phoneNumber, email));
+            : new Volunteer(firstName, lastName, middleName, description, phoneNumber, email);
     }
 }
