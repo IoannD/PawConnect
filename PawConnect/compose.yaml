@@ -1,9 +1,13 @@
 ﻿services:
   pawconnect.api:
     image: pawconnect.api
-    build:
+    build:  
       context: .
       dockerfile: PawConnect.API/Dockerfile
+    environment:
+      - ConnectionStrings__DB_CONNECTION_STRING
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - 5555:8080
     depends_on:
@@ -12,7 +16,7 @@
   db:
     image: postgres:latest
     container_name: db_paw_connect
-    restart: unless-stopped
+    restart: unless-stopped 
     environment:
       POSTGRES_DB: "PawConnect"
       POSTGRES_USER: "postgres"
