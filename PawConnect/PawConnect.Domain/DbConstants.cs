@@ -1,4 +1,4 @@
-namespace PawConnect.Infrastructure;
+namespace PawConnect.Domain;
 
 public static class DbConstants
 {

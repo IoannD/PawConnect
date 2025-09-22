@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PawConnect.Domain;
 using PawConnect.Domain.PetModel;
 
 namespace PawConnect.Infrastructure.ModelsConfigurations;

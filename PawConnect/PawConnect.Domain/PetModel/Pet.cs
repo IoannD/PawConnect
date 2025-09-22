@@ -39,8 +39,21 @@ public class Pet : Entity
 
     public static Result<Pet, Error> Create(string name, string description, PhoneNumber contactNumber)
     {
-        return string.IsNullOrWhiteSpace(name)
-            ? Result.Failure<Pet, Error>(Errors.General.ValueIsRequired(nameof(name)))
-            : Result.Success<Pet, Error>(new Pet(name, description, contactNumber));
+        if (string.IsNullOrWhiteSpace(name))
+            return Errors.General.ValueIsRequired(nameof(name));
+
+        if (name.Length > DbConstants.TextLengthShort)
+            return Errors.General.StringTooLong(nameof(name), DbConstants.TextLengthShort);
+
+        if (string.IsNullOrWhiteSpace(description))
+            return Errors.General.ValueIsRequired(nameof(description));
+
+        if (description.Length > DbConstants.TextLengthMedium)
+            return Errors.General.StringTooLong(nameof(description), DbConstants.TextLengthMedium);
+
+        if (contactNumber == null!)
+            return Errors.General.ValueIsRequired(nameof(contactNumber));
+
+        return new Pet(name, description, contactNumber);
     }
 }

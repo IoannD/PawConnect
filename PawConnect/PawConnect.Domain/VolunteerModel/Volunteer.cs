@@ -8,14 +8,15 @@ namespace PawConnect.Domain.VolunteerModel;
 public class Volunteer : Entity
 {
     [Obsolete("Only for EF Core", true)]
-    public Volunteer()
+    private Volunteer()
     {
     }
 
     private List<Pet> _pets = [];
 
-    private Volunteer(string firstName, string lastName, string middleName,
-        string description, PhoneNumber phoneNumber, Email email)
+    private Volunteer(string firstName, string lastName, string? middleName,
+        string description, PhoneNumber phoneNumber, Email email,
+        List<SocialNetworkDetails> socialNetworks, List<DonationDetails> donations)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -23,6 +24,8 @@ public class Volunteer : Entity
         Description = description;
         PhoneNumber = phoneNumber;
         Email = email;
+        SocialNetworks = new SocialNetworks(socialNetworks);
+        Donation = new Donation(donations);
     }
 
     public new Guid Id { get; }
@@ -42,20 +45,30 @@ public class Volunteer : Entity
     public int CountNeedsHelpPets => Pets.Count(p => p.Status == PetStatus.NeedsHelp);
 
     public static Result<Volunteer, Error> Create(string firstName, string lastName, string middleName,
-        string description, PhoneNumber phoneNumber, Email email)
+        string description, PhoneNumber phoneNumber, Email email,
+        List<SocialNetworkDetails>? socialNetworkDetails = null, List<DonationDetails>? donationDetails = null)
     {
         if (string.IsNullOrWhiteSpace(firstName))
-            return Result.Failure<Volunteer, Error>(Errors.General.ValueIsRequired(nameof(firstName)));
+            return Errors.General.ValueIsRequired(nameof(firstName));
+
+        if (firstName.Length > DbConstants.TextLengthShort)
+            return Errors.General.StringTooLong(nameof(firstName), DbConstants.TextLengthShort);
 
         if (string.IsNullOrWhiteSpace(lastName))
             return Errors.General.ValueIsRequired(nameof(lastName));
 
+        if (lastName.Length > DbConstants.TextLengthShort)
+            return Errors.General.StringTooLong(nameof(lastName), DbConstants.TextLengthShort);
+
         if (string.IsNullOrWhiteSpace(middleName))
             middleName = null!;
 
+        if (middleName != null! && middleName.Length > DbConstants.TextLengthShort)
+            return Errors.General.StringTooLong(nameof(lastName), DbConstants.TextLengthShort);
+
         return string.IsNullOrWhiteSpace(description)
             ? Errors.General.ValueIsRequired(nameof(description))
-            : Result.Success<Volunteer, Error>(new Volunteer(firstName, lastName,
-                middleName, description, phoneNumber, email));
+            : new Volunteer(firstName, lastName, middleName, description, phoneNumber, email,
+                socialNetworkDetails ?? [], donationDetails ?? []);
     }
 }

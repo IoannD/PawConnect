@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using PawConnect.Domain.Shared;
 
 namespace PawConnect.Domain.ValueObjects;
 
@@ -13,14 +14,20 @@ public class SocialNetworkDetails : ValueObject
     public string Title { get; }
     public string Url { get; }
 
-    public static Result<SocialNetworkDetails> Create(string title, string url)
+    public static Result<SocialNetworkDetails, Error> Create(string title, string url)
     {
         if (string.IsNullOrWhiteSpace(title))
-            return Result.Failure<SocialNetworkDetails>("Title is required.");
+            return Errors.General.ValueIsRequired(nameof(title));
 
-        return string.IsNullOrWhiteSpace(url)
-            ? Result.Failure<SocialNetworkDetails>("Url is required.")
-            : Result.Success(new SocialNetworkDetails(title, url));
+        if (title.Length > DbConstants.TextLengthShort)
+            return Errors.General.StringTooLong(nameof(title), DbConstants.TextLengthShort);
+
+        if (string.IsNullOrWhiteSpace(url))
+            return Errors.General.ValueIsRequired(nameof(url));
+
+        return url.Length > DbConstants.TextLengthLong
+            ? Errors.General.StringTooLong(nameof(url), DbConstants.TextLengthLong)
+            : new SocialNetworkDetails(title, url);
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using PawConnect.Domain.Shared;
 
 namespace PawConnect.Domain.ValueObjects;
 
@@ -13,13 +14,19 @@ public record DonationDetails
     public string Title { get; }
     public string Description { get; }
 
-    public static Result<DonationDetails> Create(string title, string description)
+    public static Result<DonationDetails, Error> Create(string title, string description)
     {
         if (string.IsNullOrWhiteSpace(title))
-            return Result.Failure<DonationDetails>("Title is required.");
+            return Errors.General.ValueIsRequired(nameof(title));
 
-        return (string.IsNullOrWhiteSpace(description))
-            ? Result.Failure<DonationDetails>("Description is required.")
-            : Result.Success(new DonationDetails(title, description));
+        if (title.Length > DbConstants.TextLengthShort)
+            return Errors.General.StringTooLong(nameof(title), DbConstants.TextLengthShort);
+
+        if (string.IsNullOrWhiteSpace(description))
+            return Errors.General.ValueIsRequired(nameof(description));
+
+        return description.Length > DbConstants.TextLengthMedium
+            ? Errors.General.StringTooLong(nameof(description), DbConstants.TextLengthMedium)
+            : new DonationDetails(title, description);
     }
 }

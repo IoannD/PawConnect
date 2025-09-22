@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using CSharpFunctionalExtensions;
+using PawConnect.Domain.Shared;
 
 namespace PawConnect.Domain.ValueObjects;
 
@@ -14,11 +15,11 @@ public partial class Email : ValueObject
 
     public string Value { get; }
 
-    public static Result<Email> Create(string email)
+    public static Result<Email, Error> Create(string email)
     {
         return EmailRegex.IsMatch(email)
-            ? Result.Success(new Email(email))
-            : Result.Failure<Email>("Invalid email.");
+            ? new Email(email)
+            : Errors.General.InvalidValue(nameof(email));
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

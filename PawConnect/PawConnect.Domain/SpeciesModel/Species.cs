@@ -25,7 +25,7 @@ public class Species : Entity
     private static Result<Species, Error> Create(string name)
     {
         return string.IsNullOrWhiteSpace(name)
-            ? Result.Failure<Species, Error>(Errors.General.ValueIsRequired("species name"))
-            : Result.Success<Species, Error>(new Species(name));
+            ? Errors.General.ValueIsRequired("species name")
+            : (new Species(name));
     }
 }

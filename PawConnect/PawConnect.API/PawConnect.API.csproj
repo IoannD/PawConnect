@@ -14,9 +14,13 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="9.0.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.4" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Contracts\Contracts.csproj" />
       <ProjectReference Include="..\PawConnect.Application\PawConnect.Application.csproj" />
       <ProjectReference Include="..\PawConnect.Domain\PawConnect.Domain.csproj" />
       <ProjectReference Include="..\PawConnect.Infrastructure\PawConnect.Infrastructure.csproj" />
