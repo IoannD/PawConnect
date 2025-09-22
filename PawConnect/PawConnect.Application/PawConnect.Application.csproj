@@ -7,7 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Contracts\Contracts.csproj" />
       <ProjectReference Include="..\PawConnect.Domain\PawConnect.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
     </ItemGroup>
 
 </Project>

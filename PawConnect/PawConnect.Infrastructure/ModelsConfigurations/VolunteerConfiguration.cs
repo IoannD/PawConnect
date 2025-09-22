@@ -50,6 +50,11 @@ public class VolunteerConfiguration : IEntityTypeConfiguration<Volunteer>
             {
                 db.ToJson();
 
+                // Explicitly tell EF Core which JSON column to use for this owned collection.
+                // Without this, EF throws ArgumentNullException ("key" null) because it cannot
+                // resolve the container column for the JSON array (Details inside SocialNetworks).
+                db.OwnedEntityType.SetContainerColumnName("donation");
+
                 db.Property(d => d.Title)
                     .HasMaxLength(DbConstants.TextLengthShort)
                     .IsRequired();
@@ -66,6 +71,11 @@ public class VolunteerConfiguration : IEntityTypeConfiguration<Volunteer>
             b.OwnsMany(d => d.Details, db =>
             {
                 db.ToJson();
+
+                // Explicitly tell EF Core which JSON column to use for this owned collection.
+                // Without this, EF throws ArgumentNullException ("key" null) because it cannot
+                // resolve the container column for the JSON array (Details inside SocialNetworks).
+                db.OwnedEntityType.SetContainerColumnName("social_networks");
 
                 db.Property(d => d.Title)
                     .HasMaxLength(DbConstants.TextLengthShort)
